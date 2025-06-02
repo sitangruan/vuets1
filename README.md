@@ -1,3 +1,29 @@
+This is demo project to prove the usage of these technical aspects:
+
+ 1. Vue3
+ 2. Typescript
+ 3. Vitest + Playwright
+ 4. Vite
+ 5. Tailwind (maybe plus Vant or Ant Design Vue)
+ 6. Vue Router, route guard
+ 7. Pinia (store management)
+ 8. Directive
+ 9. Responsive design (in mobile view the layout is different)
+
+
+The source codes url is:
+https://github.com/sitangruan/vuets1
+
+The deployment url is:
+https://agreeable-moss-07ea4e80f.6.azurestaticapps.net/
+
+By Sitang Ruan.
+https://www.linkedin.com/in/sitang-ruan/
+
+
+Thanks for viewing!
+
+
 # vuets1
 
 This template should help get you started developing with Vue 3 in Vite.

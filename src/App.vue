@@ -1,45 +1,43 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+  import { linkedInUrl, sourceCodesUrl } from './common/constants';
+  import SideBar from './views/layout/sideBar.vue';
 </script>
-
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-    <div class="wrapper">
-      <HelloWorld msg="Sitang's Vue-TS 1. You did it!" />
+    <div class='titlePart'>
+      <a :href='linkedInUrl' target='_blank'><img src='/sitangCircle.png' title='Sitang Ruan'/></a>
+      <div class='title'>Sitang Vue Demo 1</div>
     </div>
+    <a :href='sourceCodesUrl' target='_blank'>{{sourceCodesUrl}}</a>
   </header>
   <main>
-    <TheWelcome />
+    <SideBar></SideBar>
+    <router-view class='w-full h-full p-2'></router-view>
   </main>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
+  @import "tailwindcss";
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
   header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    @apply flex max-md:flex-col justify-between items-center border-1 border-slate-500 pl-5 font-bold w-full h-20 max-md:h-18 max-md:justify-around box-border;
+    .titlePart {
+      @apply flex items-center;
+
+      img {
+        @apply w-10 cursor-pointer
+      }
+
+      .title {
+        @apply text-3xl max-md:text-xl;
+      }
+    }
+    a {
+      @apply text-2xl max-md:text-base underline pr-4 text-blue-300 cursor-pointer;
+    }
   }
 
-  .logo {
-    margin: 0 2rem 0 0;
+  main {
+    @apply flex h-[calc(100vh-80px)] max-md:h-[calc(100vh-60px)] w-full;
   }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
 </style>
