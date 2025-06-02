@@ -1,31 +1,50 @@
 import { createRouter, createWebHashHistory, type RouteRecordRaw } from "vue-router";
 import { routeList } from "../common/constants";
 import type { NavigationLink } from "@/modals";
+import Todos from "@/views/todos/index.vue";
+import Posts from "@/views/posts/index.vue";
+import Users from "@/views/users/index.vue";
+import Albums from "@/views/albums/index.vue";
+
+const routeMap = (routeName: string) => {
+  switch (routeName) {
+    case 'todos':
+      return Todos;
+    case 'posts':
+      return Posts;
+    case 'users':
+      return Users;
+    case 'albums':
+      return Albums;
+    default:
+      throw new Error(`Route component for ${routeName} not found.`);
+  }
+};
 
 const populateRoutes = (links: NavigationLink[]): Array<RouteRecordRaw> => {
+
   const myRoutes = Array<RouteRecordRaw>();
 
   let hasAddedDefaultRoute = false;
-  links.forEach((route) => {
-    if (!hasAddedDefaultRoute && route.isDefaultLink) {
+  links.forEach((link) => {
+    if (!hasAddedDefaultRoute && link.isDefaultLink) {
       hasAddedDefaultRoute = true;
       myRoutes.push({
         path: '/',
-        redirect: `/${route.route}`,
+        redirect: `/${link.route}`,
       } as RouteRecordRaw);
     }
 
-    const myPath = route.hasNestedLink
-      ? `/${route.route}/:id?` : `/${route.route}`;
+    const myPath = link.hasNestedLink
+      ? `/${link.route}/:id?` : `/${link.route}`;
 
     myRoutes.push({
       path: myPath,
-      name: route.route,
-      component: () => import(`${route.componentPath}`),
+      name: link.route,
+      component: routeMap(link.route),
     } as RouteRecordRaw);
   });
 
-  console.log("myRoutes", myRoutes);
   return myRoutes;
 }
 
