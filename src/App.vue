@@ -12,7 +12,7 @@
   </header>
   <main>
     <SideBar></SideBar>
-    <router-view class='w-full h-full p-2'></router-view>
+    <router-view></router-view>
   </main>
 </template>
 

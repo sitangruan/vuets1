@@ -11,7 +11,6 @@ export default defineConfig({
     ],
     server: {
         port: 57660,
-        open: 'index.html',
     },
     resolve: {
       alias: {

@@ -5,4 +5,6 @@ export type NavigationLink = {
  isDefaultLink: boolean,
  hasNestedLink: boolean,
  componentPath: string,
+ parentRoute?: string,
+ children?: NavigationLink[],
 }
