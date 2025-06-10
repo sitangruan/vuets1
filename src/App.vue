@@ -20,7 +20,7 @@
   @import "tailwindcss";
 
   header {
-    @apply flex max-md:flex-col justify-between items-center border-1 border-slate-500 pl-5 font-bold w-full h-20 max-md:h-18 max-md:justify-around box-border;
+    @apply flex max-md:flex-col max-md:justify-center justify-between items-center border-b-1 border-slate-500 pl-5 font-bold w-full h-20 max-md:h-18 max-md:justify-around box-border;
     .titlePart {
       @apply flex items-center;
 
@@ -38,6 +38,6 @@
   }
 
   main {
-    @apply flex h-[calc(100vh-80px)] max-md:h-[calc(100vh-60px)] w-full;
+    @apply flex h-[calc(100vh-80px)] max-md:h-[calc(100vh-60px)] max-md:flex-col w-full;
   }
 </style>
