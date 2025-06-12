@@ -38,8 +38,8 @@ export const routeList = [
         isDefaultLink: false,
         hasNestedLink: false,
         componentPath: "/src/views/posts/postDetails.vue",
-        beforeEnter: (to: object) => {
-          if (!Number.isInteger(Number(to.params.id)) || !(to.params.id > 0)) {
+        beforeEnter: (to: { params: { id: number } }) => {
+          if (!Number.isInteger(Number(to.params?.id)) || !(to.params?.id > 0)) {
             alert("Invalid post ID. Please enter a valid integer greater than 0.");
             return false;
           }
