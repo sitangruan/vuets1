@@ -7,4 +7,5 @@ export type NavigationLink = {
  componentPath: string,
  parentRoute?: string,
  children?: NavigationLink[],
+ beforeEnter?: (to: object, from: object) => boolean | void,
 }

@@ -38,6 +38,15 @@ export const routeList = [
         isDefaultLink: false,
         hasNestedLink: false,
         componentPath: "/src/views/posts/postDetails.vue",
+        beforeEnter: (to: object) => {
+          if (!Number.isInteger(Number(to.params.id)) || !(to.params.id > 0)) {
+            alert("Invalid post ID. Please enter a valid integer greater than 0.");
+            return false;
+          }
+
+          // If the id is a valid integer, allow navigation
+          return true; // Allow navigation
+        }
       } as NavigationLink,
     ]
   },

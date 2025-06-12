@@ -1,15 +1,17 @@
 <template>
   <div class="post-list-container">
     <h1 >This is Post List</h1>
-    <a @click="gotoDetail">Go to Post 112</a>
+    <a @click="gotoDetail(112)">Go to Post 112</a>
+    <a @click="gotoDetail('abc')">Go to Post abc <span class='text-red-500'>(Illegal ID...)</span></a>
   </div>
 </template>
 
 <script setup lang="ts">
-  import router from '@/router'
-  const gotoDetail = () => {
-    router.push({ name: 'Post-Details', params: { id: 112 } });
-  }
+  import router from '@/router';
+
+  const gotoDetail = (toGoId: string | number) => {
+    router.push({ name: 'Post-Details', params: { id: toGoId } });
+  };
 </script>
 
 <style scoped>

@@ -62,23 +62,28 @@ const populateRoutes = (links: NavigationLink[]): Array<RouteRecordRaw> => {
       childrenRoute.push(...nestedRoutes);
     }
 
-    myRoutes.push({
-        path: link.route,
-        name: link.displayName,
-        component: routeMap(link.route, link.parentRoute),
-        children: childrenRoute,
-      } as RouteRecordRaw);
+    const baseRouteValue = {
+      path: link.route,
+      name: link.displayName,
+      component: routeMap(link.route, link.parentRoute),
+      children: childrenRoute,
+    };
+
+    const fullRouteValue = (link.beforeEnter ? {
+        ...baseRouteValue,
+        beforeEnter: link.beforeEnter,
+      } : baseRouteValue
+    ) as RouteRecordRaw;
+
+    myRoutes.push(fullRouteValue);
   });
 
   return myRoutes;
 }
 
-const totalRoutes = populateRoutes(routeList);
-console.log("Total Routes: ", totalRoutes);
-
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: totalRoutes,
+  routes: populateRoutes(routeList),
 });
 
 export default router;
