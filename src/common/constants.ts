@@ -72,3 +72,4 @@ export const linkedInUrl = 'https://www.linkedin.com/in/sitang-ruan/';
 
 export const sourceCodesUrl = 'https://github.com/sitangruan/vuets1';
 
+export const idPlaceHolder = '{id}';

@@ -6,6 +6,13 @@
 </template>
 
 <script setup lang="ts">
+  import { onMounted } from 'vue';
+  import { usePostsStore } from '@/stores/usePostsStore';
+
+  const postsStore = usePostsStore();
+  onMounted(() => {
+    postsStore.fetchPosts();
+  });
 </script>
 
 <style scoped>
