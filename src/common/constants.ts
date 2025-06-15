@@ -2,6 +2,7 @@
  * This the central place for all constant value definitions.
  */
 
+import type { SortingInfo } from "@/modals/SortingInfo";
 import type { NavigationLink } from "../modals/index";
 
 export const routeList = [
@@ -73,3 +74,15 @@ export const linkedInUrl = 'https://www.linkedin.com/in/sitang-ruan/';
 export const sourceCodesUrl = 'https://github.com/sitangruan/vuets1';
 
 export const idPlaceHolder = '{id}';
+
+export const defaultPostsSortingInfo = {
+  sortBy: 'title',
+  sortOrder: 'asc',
+} as SortingInfo;
+
+export const postsGridColumns = [
+  { field: 'title', label: 'Title', sortable: true, headerClassName: 'col-title-header', className: 'col-title' },
+  { field: 'body', label: 'Body', sortable: true, headerClassName: 'col-body-header', className: 'col-body' },
+  { field: 'userName', label: 'User Name', sortable: true, headerClassName: 'col-username-header', className: 'col-username' },
+  { field: 'email', label: 'Email', sortable: true, headerClassName: 'col-email-header', className: 'col-email' },
+] as const;

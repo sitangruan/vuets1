@@ -7,10 +7,14 @@
 
 <script setup lang="ts">
   import { onMounted } from 'vue';
+  import { useUsersStore } from '@/stores/useUsersStore';
   import { usePostsStore } from '@/stores/usePostsStore';
 
+  const usersStore = useUsersStore();
   const postsStore = usePostsStore();
+
   onMounted(() => {
+    usersStore.fetchUsers();
     postsStore.fetchPosts();
   });
 </script>
@@ -19,10 +23,10 @@
   @import "tailwindcss";
 
   .posts-root-container {
-    @apply flex flex-col items-center flex-1 h-full p-4;
+    @apply flex flex-col flex-1 h-full p-4;
 
     h1 {
-      @apply text-3xl font-bold mb-4;
+      @apply text-3xl font-bold;
     }
   }
 </style>
