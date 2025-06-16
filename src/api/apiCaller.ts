@@ -5,7 +5,7 @@
 import { apiUrls } from "../common/urls";
 import { sleepFor } from "../common/utillities";
 
-const forceWaitingTime = 200;
+const forceWaitingTime = 500;
 
 const apiCaller = {
   todos: {

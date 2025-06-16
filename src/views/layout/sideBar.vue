@@ -20,7 +20,7 @@ import { routeList } from '@/common/constants';
   @import "tailwindcss";
 
   .side {
-    @apply flex flex-col max-md:flex-row max-md:w-full bg-gray-100 w-50 shadow-[0px_2px_6px_0px_rgba(60,_73,_112,_0.25)];
+    @apply flex shrink-0 flex-col max-md:flex-row max-md:w-full bg-gray-100 w-50 shadow-[0px_2px_6px_0px_rgba(60,_73,_112,_0.25)];
 
     a {
       @apply no-underline;

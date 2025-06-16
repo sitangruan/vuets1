@@ -1,7 +1,7 @@
 // The store for managing posts
 
 import { defineStore } from 'pinia';
-import { apiUrls } from '../common/urls';
+import apicaller from '../api/apiCaller';
 import type { PostElement, PostFullElement } from '@/modals/PostElement';
 import { defaultPostsSortingInfo } from '@/common/constants';
 import { useUsersStore } from '@/stores/useUsersStore';
@@ -17,8 +17,7 @@ export const usePostsStore = defineStore('posts', {
       this.isLoading = true;
 
       try {
-        const response = await fetch(apiUrls.posts);
-        this.posts = (await response.json()) as PostElement[];
+        this.posts = (await apicaller.posts.getPosts()) as PostElement[];
       } catch (error) {
         console.error("Error fetching posts:", error);
       } finally {

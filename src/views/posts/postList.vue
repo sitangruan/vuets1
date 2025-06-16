@@ -25,9 +25,7 @@
         :class="{ 'odd-row': index % 2 === 1 }"
       >
         <div class="cell col-title">
-          <a @click="gotoDetail(post.id)">
-            <span class="ellipsis-text">{{ post.title }}</span>
-          </a>
+          <span @click="gotoDetail(post.id)" class="goto-link ellipsis-text">{{ post.title }}</span>
         </div>
         <div class="cell col-body">
           <span class="ellipsis-text">{{ post.body }}</span>
@@ -72,7 +70,7 @@
   @import "tailwindcss";
 
 
-  a {
+  a, .goto-link {
     @apply text-blue-500 hover:underline cursor-pointer;
   }
 

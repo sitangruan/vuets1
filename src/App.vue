@@ -1,7 +1,3 @@
-<script setup lang="ts">
-  import { linkedInUrl, sourceCodesUrl } from './common/constants';
-  import SideBar from './views/layout/sideBar.vue';
-</script>
 <template>
   <header>
     <div class='titlePart'>
@@ -14,7 +10,21 @@
     <SideBar></SideBar>
     <router-view></router-view>
   </main>
+  <LoadSpinner
+    :visible="globalStore.isLoading"
+    :showSpinner="globalStore.isShowSpinner"
+    :isMaskTransparent="globalStore.isMaskTransparent"
+  />
 </template>
+
+<script setup lang="ts">
+  import { linkedInUrl, sourceCodesUrl } from './common/constants';
+  import SideBar from './views/layout/sideBar.vue';
+  import { useGlobalStore } from './stores/useGlobalStore';
+  import LoadSpinner from './components/loadSpinner.vue';
+
+  const globalStore = useGlobalStore();
+</script>
 
 <style scoped>
   @import "tailwindcss";
@@ -38,6 +48,6 @@
   }
 
   main {
-    @apply flex h-[calc(100vh-80px)] max-md:h-[calc(100vh-60px)] max-md:flex-col w-full;
+    @apply flex h-[calc(100vh-80px)] max-md:h-[calc(100vh-60px)] max-md:flex-col w-full box-border;
   }
 </style>
