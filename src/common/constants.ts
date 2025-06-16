@@ -18,7 +18,7 @@ export const routeList = [
     id: 2,
     displayName: "Posts",
     route: "/posts",
-    isDefaultLink: false,
+    isDefaultLink: true,
     hasNestedLink: true,
     componentPath: "/src/views/posts/index.vue",
     children: [
@@ -55,7 +55,7 @@ export const routeList = [
     id: 3,
     displayName: "Users",
     route: "/users",
-    isDefaultLink: true,
+    isDefaultLink: false,
     hasNestedLink: false,
     componentPath: "/src/views/users/index.vue",
   },
