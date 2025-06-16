@@ -5,10 +5,10 @@
           v-for="col in postsGridColumns"
           :key="col.field"
           class="col-header"
-          :class="col.className"
+          :class="col.headerClassName"
           @click="postsStore.doSorting(col.field)"
         >
-          <div>
+          <div class="header-text">
             {{ col.label }}
           </div>
           <div
@@ -69,7 +69,6 @@
 <style scoped>
   @import "tailwindcss";
 
-
   a, .goto-link {
     @apply text-blue-500 hover:underline cursor-pointer;
   }
@@ -85,7 +84,7 @@
       @apply flex w-full justify-between gap-1 h-10 flex-[0_0_basis] shadow-[0px_2px_6px_0px_rgba(60,_73,_112,_0.25)];
 
       .col-header {
-        @apply flex justify-center items-center cursor-pointer font-bold bg-gray-200;
+        @apply flex justify-center items-center cursor-pointer bg-gray-200 text-base;
 
         .empty-icon {
           @apply w-4 h-4 ml-3;
@@ -98,6 +97,10 @@
         .desc {
           @apply rotate-[180deg];
         }
+
+        .header-text {
+          @apply font-bold;
+        }
       }
     }
 
@@ -106,7 +109,7 @@
     }
 
     .col-title, .col-title-header {
-      @apply w-[25%];
+      @apply w-[25%] font-black;
     }
 
     .col-body, .col-body-header {
