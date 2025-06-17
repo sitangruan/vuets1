@@ -97,7 +97,7 @@
     @apply flex flex-col items-center w-full h-full p-4;
 
     .top-row {
-      @apply flex items-center w-full mb-4;
+      @apply flex items-center w-full mb-4 shrink-0;
 
       .back-link {
         @apply text-blue-500 hover:underline cursor-pointer flex items-center text-xl;
@@ -109,7 +109,7 @@
     }
 
     .details-content {
-      @apply flex flex-col items-start w-full h-full p-4 bg-gray-100 rounded-lg shadow-md;
+      @apply flex flex-col items-start w-full flex-1 p-4 bg-gray-100 rounded-lg shadow-md overflow-y-auto;
 
       .title {
         @apply text-2xl font-bold mb-2;
