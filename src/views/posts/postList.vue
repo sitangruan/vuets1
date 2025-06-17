@@ -47,8 +47,8 @@
       <li v-for="post in postsStore.sortedFullPosts" :key="post.id">
         <a @click="gotoDetail(post.id)">{{ post.title }}</a>
         <div class="text-gray-500 text-sm">{{ post.body }}</div>
-        <div v-if="post.userName" class="text-gray-400 text-xs">by {{ post.userName }} ({{ post.email }})</div>
-        <div v-else class="text-gray-400 text-xs">by Unknown User</div>
+        <div v-if="post.userName" class="user-info">by {{ post.userName }} ({{ post.email }})</div>
+        <div v-else class="user-info">by Unknown User</div>
       </li>
     </ul>
   </div>
@@ -61,7 +61,7 @@
 
   const postsStore = usePostsStore();
 
-  const gotoDetail = (toGoId: string | number) => {
+  const gotoDetail = (toGoId: number) => {
     router.push({ name: 'Post-Details', params: { id: toGoId } });
   };
 </script>
@@ -151,6 +151,10 @@
 
     li {
       @apply border-b-1 border-gray-300 py-2;
+    }
+
+    .user-info {
+      @apply text-gray-400 text-xs;
     }
   }
 </style>

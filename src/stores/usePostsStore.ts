@@ -2,13 +2,15 @@
 
 import { defineStore } from 'pinia';
 import apicaller from '../api/apiCaller';
-import type { PostElement, PostFullElement } from '@/modals/PostElement';
+import type { PostFullElement } from '@/modals/PostElement';
 import { defaultPostsSortingInfo } from '@/common/constants';
 import { useUsersStore } from '@/stores/useUsersStore';
+import type { CommentElement } from '@/modals/CommentElement';
 
 export const usePostsStore = defineStore('posts', {
   state: () => ({
-    posts: [] as PostElement[],
+    posts: [] as PostFullElement[],
+    currentPostId: 0,
     isLoading: false,
     sortingField: defaultPostsSortingInfo,
   }),
@@ -17,9 +19,30 @@ export const usePostsStore = defineStore('posts', {
       this.isLoading = true;
 
       try {
-        this.posts = (await apicaller.posts.getPosts()) as PostElement[];
+        this.posts = (await apicaller.posts.getPosts()) as PostFullElement[];
       } catch (error) {
         console.error("Error fetching posts:", error);
+      } finally {
+        this.isLoading = false;
+      }
+    },
+    async getPostDetails(postId: number) {
+      if (!Number.isInteger(postId) || !(postId > 0)) {
+        throw new Error("Invalid post ID. Please enter a valid integer greater than 0.");
+      }
+
+      this.isLoading = true;
+
+      try {
+        const comments = (await apicaller.posts.getPostComments(postId)) as CommentElement[];
+        const foundPost = this.posts.find(post => post.id === postId);
+        if (foundPost) {
+          // Attach comments to the post
+          foundPost.comments = comments;
+        }
+      } catch (error) {
+        console.error("Error fetching post comments:", error);
+        throw error; // Re-throw the error to handle it in the component
       } finally {
         this.isLoading = false;
       }
@@ -36,6 +59,12 @@ export const usePostsStore = defineStore('posts', {
         };
       }
     },
+    setCurrentPostId(postId: number) {
+      if (!Number.isInteger(postId) || !(postId >= 0)) {
+        throw new Error("Invalid post ID. Please enter a valid integer greater than or equal to 0.");
+      }
+      this.currentPostId = postId;
+    }
   },
   getters: {
     sortedFullPosts (state): PostFullElement[] {
@@ -75,6 +104,12 @@ export const usePostsStore = defineStore('posts', {
       });
 
       return fullList;
+    },
+    currentPost(state): PostFullElement | null {
+      if (state.currentPostId <= 0) {
+        return null;
+      }
+      return state.posts.find(post => post.id === state.currentPostId) || null;
     }
   },
 });

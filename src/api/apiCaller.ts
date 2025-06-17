@@ -4,6 +4,7 @@
 
 import { apiUrls } from "../common/urls";
 import { sleepFor } from "../common/utillities";
+import { idPlaceHolder } from "../common/constants";
 
 const forceWaitingTime = 500;
 
@@ -52,6 +53,17 @@ const apiCaller = {
         return response.json();
       })
     },
+    getPostComments(postId: number) {
+      if (!Number.isInteger(postId) || !(postId > 0)) {
+        throw new Error("Invalid post ID. Please enter a valid integer greater than 0.");
+      }
+
+      const myUrl = apiUrls.comments.replace(idPlaceHolder, postId.toString());
+      return fetch(myUrl).then(response => {
+        sleepFor(forceWaitingTime); //Same as above.
+        return response.json();
+      })
+    }
   },
   albums: {
     //To be implemented if needed.
