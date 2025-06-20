@@ -64,7 +64,36 @@ export const usePostsStore = defineStore('posts', {
         throw new Error("Invalid post ID. Please enter a valid integer greater than or equal to 0.");
       }
       this.currentPostId = postId;
-    }
+    },
+    async addCommentToPost(postId: number, comment: string) {
+      try {
+        if (!Number.isInteger(postId) || !(postId > 0)) {
+          throw new Error("Invalid post ID. Please enter a valid integer greater than 0.");
+        }
+
+        this.isLoading = true;
+
+        // Call the API to add the comment
+        const toSave = {
+          postId: postId,
+          name: 'Sitang Ruan',
+          email: 'sitangruan@example.com',
+          body: comment,
+        }
+
+        const addedComment = (await apicaller.posts.addCommentToPost(toSave)) as CommentElement;
+
+        const post = this.posts.find(post => post.id === postId);
+        if (post && post.comments) {
+          post.comments.unshift(addedComment);
+        }
+      } catch (error) {
+        console.error("Error adding comment to post in the store: ", error);
+        throw error; // Re-throw the error to handle it in the component
+      } finally {
+        this.isLoading = false;
+      }
+    },
   },
   getters: {
     sortedFullPosts (state): PostFullElement[] {
@@ -109,7 +138,7 @@ export const usePostsStore = defineStore('posts', {
       if (state.currentPostId <= 0) {
         return null;
       }
-      return state.posts.find(post => post.id === state.currentPostId) || null;
+      return this.sortedFullPosts.find(post => post.id === state.currentPostId) || null;
     }
   },
 });

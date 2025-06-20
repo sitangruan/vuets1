@@ -86,3 +86,7 @@ export const postsGridColumns = [
   { field: 'userName', label: 'User Name', sortable: true, headerClassName: 'col-username-header', className: 'col-username' },
   { field: 'email', label: 'Email', sortable: true, headerClassName: 'col-email-header', className: 'col-email' },
 ] as const;
+
+export const limits = {
+  maxCommentLength: 20,
+}

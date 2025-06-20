@@ -9,6 +9,20 @@
     <div class="details-content" v-if="postsStore.currentPost">
       <h2 class="title">{{ postsStore.currentPost?.title }}</h2>
       <p class="body">{{ postsStore.currentPost.body }}</p>
+      <p class="author-info">by: {{ postsStore.currentPost.userName || 'Unknown User' }} ({{ postsStore.currentPost.email }})</p>
+      <div class="new-comment">
+        <textarea
+          v-model="currentComment"
+          class="body"
+          placeholder="Add your comment..."
+          @input="isDirty = true"
+        ></textarea>
+        <button
+          class="submit-button"
+          @click="saveComment"
+          :disabled="!currentComment.trim() || !isDirty"
+        >Submit</button>
+      </div>
       <div class="comment-list" v-if="postsStore.currentPost.comments && postsStore.currentPost.comments.length > 0">
         <h3>Comments:</h3>
         <div
@@ -16,7 +30,7 @@
           :key="comment.id"
           class="comment-item"
         >
-          <p class="comment-author">{{ comment.name }} ({{ comment.email }})</p>
+          <p class="comment-author">{{ comment.name }} (<span class="author-email">{{ comment.email }}</span>)</p>
           <p class="comment-body">{{ comment.body }}</p>
         </div>
       </div>
@@ -35,8 +49,10 @@
   import router from '@/router';
   import { usePostsStore } from '@/stores/usePostsStore';
   import { onMounted, ref } from 'vue';
+  import { limits } from '@/common/constants';
   const route = useRoute();
 
+  const currentComment = ref('');
   const isDirty = ref(false);
   const postsStore = usePostsStore();
 
@@ -85,6 +101,25 @@
     }
   };
 
+  async function saveComment() {
+    if (currentComment.value.trim() && isDirty.value) {
+      try {
+        // Validate the comment length
+        if (currentComment.value.length > limits.maxCommentLength) {
+          alert(`Comment is too long. Please limit it to ${limits.maxCommentLength} characters.`);
+          return;
+        }
+
+        await postsStore.addCommentToPost(postsStore.currentPostId, currentComment.value);
+        currentComment.value = '';
+        isDirty.value = false;
+      } catch (error) {
+        console.error('Error saving comment: ', error);
+        alert('Failed to save comment. Please try again later. (This is faked mock error to purposely fail randomly)');
+      }
+    }
+  };
+
   onMounted(() => {
     updateCurrentPostId(Number(route.params.id));
   });
@@ -112,11 +147,27 @@
       @apply flex flex-col items-start w-full flex-1 p-4 bg-gray-100 rounded-lg shadow-md overflow-y-auto;
 
       .title {
-        @apply text-2xl font-bold mb-2;
+        @apply text-xl font-bold mb-2;
       }
 
       .body {
         @apply text-base text-gray-700;
+      }
+
+      .author-info {
+        @apply text-sm text-gray-500 mt-2;
+      }
+
+      button.submit-button {
+        @apply mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed;
+      }
+
+      .new-comment {
+        @apply mt-4 w-full;
+
+        textarea {
+          @apply w-full h-24 p-2 border border-gray-300 rounded-lg resize-none;
+        }
       }
 
       .comment-list {
@@ -127,6 +178,10 @@
 
           .comment-author {
             @apply font-semibold text-gray-800;
+
+            .author-email {
+              @apply text-gray-500;
+            }
           }
 
           .comment-body {
