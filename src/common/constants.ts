@@ -88,5 +88,5 @@ export const postsGridColumns = [
 ] as const;
 
 export const limits = {
-  maxCommentLength: 20,
+  maxCommentLength: 500,
 }

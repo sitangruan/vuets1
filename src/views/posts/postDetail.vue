@@ -144,7 +144,7 @@
     }
 
     .details-content {
-      @apply flex flex-col items-start w-full flex-1 p-4 bg-gray-100 rounded-lg shadow-md overflow-y-auto;
+      @apply flex flex-col items-start w-full h-[calc(100vh-16rem)] p-4 bg-gray-100 rounded-lg shadow-md overflow-y-auto;
 
       .title {
         @apply text-xl font-bold mb-2;
