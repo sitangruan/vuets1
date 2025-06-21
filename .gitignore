@@ -16,6 +16,7 @@ dist
 dist-ssr
 coverage
 *.local
+test-results
 
 /cypress/videos/
 /cypress/screenshots/

@@ -12,20 +12,23 @@
     "lint": "eslint . --fix"
   },
   "dependencies": {
+    "@playwright/test": "^1.53.1",
     "@tailwindcss/vite": "^4.1.7",
     "autoprefixer": "^10.4.21",
     "less": "^4.3.0",
     "npx": "^10.2.2",
     "pinia": "^3.0.3",
+    "playwright": "^1.53.1",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.7",
+    "ts-node": "^10.9.2",
     "vant": "^4.9.19",
     "vue": "^3.5.13",
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.1",
-    "@types/node": "^22.14.0",
+    "@types/node": "^22.15.32",
     "@vitejs/plugin-vue": "^5.2.3",
     "@vue/eslint-config-typescript": "^14.5.0",
     "@vue/tsconfig": "^0.7.0",

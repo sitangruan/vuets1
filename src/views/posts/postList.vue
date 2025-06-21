@@ -25,7 +25,7 @@
         :class="{ 'odd-row': index % 2 === 1 }"
       >
         <div class="cell col-title">
-          <span @click="gotoDetail(post.id)" class="goto-link ellipsis-text">{{ post.title }}</span>
+          <span :data-post-id="post.id" @click="gotoDetail(post.id)" class="goto-link ellipsis-text">{{ post.title }}</span>
         </div>
         <div class="cell col-body">
           <span class="ellipsis-text">{{ post.body }}</span>

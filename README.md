@@ -2,13 +2,17 @@ This is demo project plan to prove the usage of these technical aspects:
 
  1. Vue3
  2. Typescript
- 3. Vitest + Playwright
+ 3. Playwright
  4. Vite
  5. Tailwind (maybe plus Vant or Ant Design Vue, optional)
  6. Vue Router, route guard
  7. Pinia (store management)
  8. Directive (optional)
  9. Responsive design (in mobile view the layout is different)
+
+
+To test:
+run "npx playwright test" in the terminal.
 
 
 The source codes url is:
