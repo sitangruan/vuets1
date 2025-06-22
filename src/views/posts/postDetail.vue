@@ -115,7 +115,7 @@
         isDirty.value = false;
       } catch (error) {
         console.error('Error saving comment: ', error);
-        alert('Failed to save comment. Please try again later. (This is faked mock error to purposely fail randomly)');
+        alert('Failed to save comment. Please try again later. (This is faked mock error to purposely fail randomly. Just try again.)');
       }
     }
   };
