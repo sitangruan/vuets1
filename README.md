@@ -12,7 +12,7 @@ This is demo project plan to prove the usage of these technical aspects:
 
 
 To test:
-run "npx playwright test" in the terminal.
+run "**npx playwright test**" in the terminal.
 
 
 The source codes url is:
